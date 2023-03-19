@@ -5,7 +5,8 @@ pipeline {
     stage('Build') {
       steps {
         bat 'git --version'
-        // other build steps...
+        bat 'java -versio'
+        bat  'mvn -version'
       }
     }
 
