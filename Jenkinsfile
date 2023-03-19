@@ -2,14 +2,21 @@ pipeline {
   agent any
 
   stages {
-    stage('Build') {
+    stage('Check Git Version'){
       steps {
         bat 'git --version'
-        bat 'java -version'
-        bat  'mvn -version'
       }
     }
-
+stage('Check Jave Version'){
+      steps {
+        bat 'java --version'
+      }
+    }
+    stage('Check Maven Version'){
+          steps {
+            bat 'mvn -version'
+          }
+        }
     // other stages...
   }
 }
