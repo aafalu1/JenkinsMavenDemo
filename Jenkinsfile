@@ -1,26 +1,29 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('Check Git Version'){
-      steps {
-        bat 'git --version'
-      }
+    agent any
+    tools {
+        maven 'Maven 3.9.1'
+        jdk 'Java 11'
     }
-stage('Check Jave Version'){
-      steps {
-        bat 'java --version'
-      }
-    }
-    stage('Check Maven Version'){
-          steps {
-            bat 'mvn -version'
-          }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
         }
-    // other stages...
-  }
+        stage('Build') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                bat 'mvn deploy'
+            }
+        }
+    }
 }
-
-
-
-
